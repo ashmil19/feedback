@@ -1,6 +1,20 @@
 import Rating from '../components/Rating';
-import Neutral from '../assets/Neutral.svg'
 import { useState } from 'react';
+import Good from '../assets/Good.svg'
+import Loveit from '../assets/Loveit.svg'
+import Neutral from '../assets/Neutral.svg'
+import Worst from '../assets/Worst.svg'
+import NotGood from "../assets/It's just fine'.svg"
+import styles from './Scrollbar.module.css'
+
+
+const emojies = {
+    1: {emoji: Worst,text: "Worst"},
+    2: {emoji: NotGood,text: "Not Good"},
+    3: {emoji: Neutral,text: "Fine"},
+    4: {emoji: Good,text: "Look Good"},
+    5: {emoji: Loveit,text: "Very Good"}
+}
 
 const Feedback = () => {
     const [feedbacks, setFeedbacks] = useState([])
@@ -103,18 +117,18 @@ const Feedback = () => {
                 </div>
             </div>
 
-            <div className='w-[550px] bg-[#d5e4f1] px-8 py-4 flex flex-col gap-6 rounded-2xl justify-start'>
+            <div className='w-[550px] bg-[#d5e4f1] px-8 py-4 flex flex-col gap-6 rounded-2xl justify-start h-[700px]'>
                 <div className='font-extrabold text-2xl text-[#2071b2]'>Submitted Feedbacks</div>
-                <div className='flex flex-col gap-3'>
-                    {feedbacks && feedbacks.map((feedback)=>(
-                        <div className='bg-white h-28 rounded-lg flex shadow-md'>
+                <div className={`flex flex-col gap-3 overflow-y-scroll ${styles.customScrollbar}`}>
+                    {feedbacks && [...feedbacks].reverse().map((feedback,index)=>(
+                        <div key={index} className='bg-white h-[112px] rounded-lg flex-none flex shadow-md'>
                             <div className='w-3/4 flex flex-col justify-center pl-5 gap-2'>
-                                <div className='font-semibold text-[#2071b2]'>{feedback.comment && feedback.comment}</div>
+                                <div className='font-semibold text-[#2071b2] truncate'>{feedback.comment && feedback.comment}</div>
                                 <div className='text-[#2071b2]'>{feedback.name && feedback.name}</div>
                             </div>
                             <div className='w-1/4 flex flex-col justify-center items-center gap-2'>
-                                <img src={Neutral} alt="" className='h-[50px] w-[50px]' />
-                                <div className='text-xs text-center text-green-600 font-semibold'>Very Good</div>
+                                <img src={feedback.rating && emojies[feedback.rating].emoji} alt="" className='h-[50px] w-[50px]' />
+                                <div className='text-xs text-center text-green-600 font-semibold'>{feedback.rating && emojies[feedback.rating].text}</div>
                             </div>
                         </div>
                     ))}

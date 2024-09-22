@@ -3,7 +3,7 @@ import Good from '../assets/Good.svg'
 import Loveit from '../assets/Loveit.svg'
 import Neutral from '../assets/Neutral.svg'
 import Worst from '../assets/Worst.svg'
-import Fine from "../assets/It's just fine'.svg"
+import NotGood from "../assets/It's just fine'.svg"
 
 const Rating = ({values, setValues}) => {
 
@@ -15,7 +15,7 @@ const Rating = ({values, setValues}) => {
                 <div className='font-semibold text-sm text-[#105955]'>Worst</div>
             </div>
             <div className={`flex flex-col items-center w-[75px] h-[80px] ${values.rating !== 2 && 'grayscale opacity-30'}`}>
-                <img src={Fine} alt="" className='h-[40px] w-[40px]' />
+                <img src={NotGood} alt="" className='h-[40px] w-[40px]' />
                 <div className='font-semibold text-center text-sm text-[#105955]'>Not<br/>Good</div>
             </div>
             <div className={`flex flex-col items-center w-[75px] h-[80px] ${values.rating !== 3 && 'grayscale opacity-30'}`}>
